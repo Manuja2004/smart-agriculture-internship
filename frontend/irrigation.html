@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgriSmart Irrigation Advisor — Monitor soil moisture, get irrigation recommendations, and control your watering schedule.">
+  <title>Irrigation Control — AgriSmart</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-leaf"></i></div><span class="logo-text" id="navBrand">AgriSmart</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" id="navHome"><i class="fas fa-home"></i> Home</a>
+        <a href="planting.html" class="nav-link" id="navPlanting"><i class="fas fa-seedling"></i> Planting</a>
+        <a href="irrigation.html" class="nav-link active" id="navIrrigation"><i class="fas fa-water"></i> Irrigation</a>
+        <a href="harvest.html" class="nav-link" id="navHarvest"><i class="fas fa-shopping-cart"></i> Market</a>
+      </div>
+      <div class="nav-right">
+        <button class="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge">2</span></button>
+        <a href="profile.html" class="avatar-ring"><div class="avatar-inner"><i class="fas fa-user-circle"></i></div></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-6">
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-6">
+      <a href="index.html" class="notification-btn"><i class="fas fa-arrow-left"></i></a>
+      <h1 class="text-2xl font-bold text-dark flex items-center gap-2"><i class="fas fa-water text-green-900"></i> <span id="pageTitle">Irrigation Advisor</span></h1>
+    </div>
+
+    <!-- Crop Selector -->
+    <div class="card mb-6">
+      <label class="form-label"><i class="fas fa-seedling text-green-900"></i> <span id="cropLabel">Crop</span></label>
+      <select class="form-select" id="cropSelect"></select>
+    </div>
+
+    <!-- Rain Probability Gauge -->
+    <div class="card mb-6">
+      <h2 class="text-lg font-bold text-dark mb-4 flex items-center gap-2"><i class="fas fa-cloud-rain text-green-900"></i> <span id="rainTitle">Rain Probability</span></h2>
+      <div class="flex flex-col items-center">
+        <div style="width:12rem;height:12rem;margin-bottom:1rem;">
+          <svg width="100%" height="100%" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#E5E7EB" stroke-width="10"/>
+            <circle id="rainCircle" cx="50" cy="50" r="45" fill="none" stroke="#1B5E20" stroke-width="10" stroke-linecap="round" stroke-dasharray="282.74" stroke-dashoffset="282.74" transform="rotate(-90 50 50)"/>
+            <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" style="font-size:1.25rem;font-weight:700;fill:#263238;" id="rainText">0%</text>
+          </svg>
+        </div>
+        <p class="text-lg font-semibold text-dark flex items-center gap-2"><i class="fas fa-cloud-rain text-green-900"></i> <span id="rainSummary">0% Chance of Rain</span></p>
+      </div>
+    </div>
+
+    <!-- Soil Moisture -->
+    <div class="card mb-6" id="moistureSection"></div>
+
+    <!-- Temperature Warnings -->
+    <div class="card mb-6" id="warningSection"></div>
+
+    <!-- Daily Recommendation -->
+    <div class="card-green mb-6" id="recommendSection"></div>
+
+    <!-- Schedule -->
+    <div class="card mb-6" id="scheduleSection"></div>
+
+    <!-- 7-Day Moisture Chart -->
+    <div class="card mb-6">
+      <h2 class="text-lg font-bold text-dark mb-4 flex items-center gap-2"><i class="fas fa-chart-line text-green-900"></i> <span id="fcTitle">7-Day Moisture Forecast</span></h2>
+      <div class="chart-container"><canvas id="moistureChart"></canvas></div>
+    </div>
+
+    <!-- System Status -->
+    <div class="card mb-6" id="systemSection"></div>
+
+    <!-- Decision Card -->
+    <div class="card-decision mb-6" id="decisionSection"></div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <div class="flex">
+        <a href="index.html" class="bottom-nav-item"><i class="fas fa-home"></i><span id="bnHome">Home</span></a>
+        <a href="planting.html" class="bottom-nav-item"><i class="fas fa-seedling"></i><span id="bnPlanting">Planting</span></a>
+        <a href="irrigation.html" class="bottom-nav-item active"><i class="fas fa-water"></i><span id="bnIrrigation">Irrigation</span></a>
+        <a href="harvest.html" class="bottom-nav-item"><i class="fas fa-shopping-cart"></i><span id="bnHarvest">Market</span></a>
+        <a href="profile.html" class="bottom-nav-item"><i class="fas fa-user-circle"></i><span id="bnProfile">Profile</span></a>
+      </div>
+    </nav>
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/irrigation.js"></script>
+</body>
+</html>

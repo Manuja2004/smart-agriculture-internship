@@ -1,13 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgriSmart — Smart agriculture dashboard with weather, market insights, and planting recommendations for farmers.">
+  <title>AgriSmart — Smart Agriculture Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+        <span class="logo-text" id="navBrand">AgriSmart</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link active" id="navHome"><i class="fas fa-home"></i> Home</a>
+        <a href="planting.html" class="nav-link" id="navPlanting"><i class="fas fa-seedling"></i> Planting Insights</a>
+        <a href="irrigation.html" class="nav-link" id="navIrrigation"><i class="fas fa-water"></i> Irrigation Control</a>
+        <a href="harvest.html" class="nav-link" id="navHarvest"><i class="fas fa-shopping-cart"></i> Market Updates</a>
+      </div>
+      <div class="nav-right">
+        <button class="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge">3</span></button>
+        <a href="profile.html" class="avatar-ring"><div class="avatar-inner"><i class="fas fa-user-circle"></i></div></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-8">
+    <!-- Welcome -->
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-dark" id="welcomeText">Welcome back, Farmer</h1>
+      <p class="text-muted text-sm mt-1" id="welcomeSub">Your farm is looking healthy today. You have <span class="text-amber font-semibold">3</span> notifications</p>
+    </div>
+
+    <!-- Weather Section -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-dark mb-4" id="weatherTitle">Weather Forecast</h2>
+      <div class="weather-card" id="weatherMain">
+        <div class="flex flex-col" style="gap:1rem;">
+          <div>
+            <p class="text-sm opacity-90 font-medium flex items-center gap-1"><i class="fas fa-map-marker-alt" style="font-size:.75rem;"></i> <span id="weatherLoc">Loading...</span></p>
+            <div class="flex items-center gap-2 mt-1" style="align-items:baseline;">
+              <span class="text-3xl font-bold" id="weatherTemp">--°C</span>
+              <span class="text-base flex items-center gap-1"><span id="weatherIcon">☀️</span> <span id="weatherCond">--</span></span>
+            </div>
+            <p class="text-xs opacity-80 mt-1" id="weatherDate"></p>
+          </div>
+          <div class="flex gap-4" id="weatherForecastInline"></div>
+        </div>
+      </div>
+      <div class="grid grid-5 gap-3" id="forecastGrid"></div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid grid-3 gap-6 mb-8" style="grid-template-columns:1fr;" id="featureCards">
+      <!-- Planting -->
+      <div class="card card-hoverable">
+        <div class="icon-box icon-box-green mb-4"><i class="fas fa-seedling"></i></div>
+        <h3 class="text-xl font-bold text-dark mb-2" id="fcPlantTitle">Planting Insights</h3>
+        <p class="text-muted text-sm mb-4" id="fcPlantDesc">Best crops for current season</p>
+        <a href="planting.html" class="link-action" id="fcPlantLink">View Recommendations <i class="fas fa-chevron-right text-xs"></i></a>
+      </div>
+      <!-- Harvest -->
+      <div class="card card-hoverable">
+        <div class="icon-box icon-box-green mb-4"><i class="fas fa-leaf"></i></div>
+        <h3 class="text-xl font-bold text-dark mb-2" id="fcHarvestTitle">Market Updates</h3>
+        <p class="text-muted text-sm mb-4" id="fcHarvestDesc">Crop maturity at 85%</p>
+        <a href="harvest.html" class="link-action" id="fcHarvestLink">Check Yield <i class="fas fa-chevron-right text-xs"></i></a>
+      </div>
+      <!-- Irrigation -->
+      <div class="card card-hoverable">
+        <div class="icon-box icon-box-green mb-4"><i class="fas fa-water"></i></div>
+        <h3 class="text-xl font-bold text-dark mb-2" id="fcIrrigTitle">Irrigation Control</h3>
+        <p class="text-muted text-sm mb-4" id="fcIrrigDesc">Soil moisture: 65%</p>
+        <a href="irrigation.html" class="link-action" id="fcIrrigLink">Manage Watering <i class="fas fa-chevron-right text-xs"></i></a>
+      </div>
+    </div>
+
+    <!-- Market Analytics -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-dark mb-6" id="marketTitle">Market Insights</h2>
+      <div class="grid gap-6" style="grid-template-columns:1fr;" id="chartsGrid">
+        <!-- Pie + Legend -->
+        <div class="card">
+          <h3 class="text-lg font-semibold text-dark mb-4" id="pieTitle">Crop Distribution</h3>
+          <p class="text-muted text-sm mb-4" id="pieSubtitle">ACRES TOTAL: 1.2K</p>
+          <div class="flex items-center gap-8" style="flex-wrap:wrap;">
+            <div style="width:12rem;height:12rem;"><canvas id="pieChart"></canvas></div>
+            <div class="flex-1 space-y-3" id="pieLegend"></div>
+          </div>
+        </div>
+        <!-- Line Chart -->
+        <div class="card">
+          <h3 class="text-lg font-semibold text-dark mb-4" id="lineTitle">Price Trends</h3>
+          <div class="chart-container"><canvas id="lineChart"></canvas></div>
+        </div>
+        <!-- Bar Chart -->
+        <div class="card">
+          <h3 class="text-lg font-semibold text-dark mb-4" id="barTitle">Yield Comparison</h3>
+          <div class="chart-container"><canvas id="barChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="card-green mb-8" style="padding:2rem;">
+      <div class="flex flex-col gap-4" style="align-items:center;text-align:center;">
+        <div>
+          <h2 class="text-2xl font-bold mb-2" id="ctaTitle">Increase Your Farm Productivity with Smart AI</h2>
+          <p class="text-white-90" id="ctaDesc">Our AI models predict pests, optimize harvests, and manage water resources with 95% precision.</p>
+        </div>
+        <button class="btn btn-amber" id="ctaBtn">Explore Dashboard <i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="grid gap-8" style="grid-template-columns:1fr;">
+        <div>
+          <h3 id="ftAbout">About</h3>
+          <p id="ftAboutText">AgriSmart helps farmers make data-driven decisions for sustainable farming.</p>
+        </div>
+        <div>
+          <h3 id="ftQuickLinks">Quick Links</h3>
+          <ul>
+            <li><a href="index.html" id="ftHome">Home</a></li>
+            <li><a href="planting.html" id="ftPlanting">Planting Insights</a></li>
+            <li><a href="irrigation.html" id="ftIrrigation">Irrigation Control</a></li>
+            <li><a href="harvest.html" id="ftHarvest">Market Updates</a></li>
+            <li><a href="profile.html" id="ftProfile">Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 id="ftSupport">Support</h3>
+          <ul>
+            <li id="ftContact">Contact Us</li>
+            <li id="ftFaq">FAQ</li>
+            <li id="ftPrivacy">Privacy Policy</li>
+            <li id="ftTerms">Terms of Service</li>
+          </ul>
+        </div>
+        <div>
+          <h3 id="ftConnect">Connect</h3>
+          <div class="flex gap-3 mb-3">
+            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+            <div class="social-icon"><i class="fab fa-twitter"></i></div>
+            <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div class="social-icon"><i class="fab fa-instagram"></i></div>
+          </div>
+          <p class="text-sm text-muted">©️ 2024 <span id="ftBrand">AgriSmart</span>. <span id="ftRights">All rights reserved.</span></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+</body>
 </html>

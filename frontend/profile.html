@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your AgriSmart farmer profile, farm details, and account settings.">
+  <title>Profile — AgriSmart</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-leaf"></i></div><span class="logo-text" id="navBrand">AgriSmart</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" id="navHome"><i class="fas fa-home"></i> Home</a>
+        <a href="planting.html" class="nav-link" id="navPlanting"><i class="fas fa-seedling"></i> Planting Insights</a>
+        <a href="irrigation.html" class="nav-link" id="navIrrigation"><i class="fas fa-water"></i> Irrigation Control</a>
+        <a href="harvest.html" class="nav-link" id="navHarvest"><i class="fas fa-shopping-cart"></i> Market Updates</a>
+      </div>
+      <div class="nav-right">
+        <button class="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge">2</span></button>
+        <div class="avatar-ring"><div class="avatar-inner"><i class="fas fa-user-circle"></i></div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-sm py-8">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="profile-header-inner">
+        <div class="profile-avatar-ring">
+          <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
+          <button class="profile-camera"><i class="fas fa-camera" style="font-size:.75rem;"></i></button>
+        </div>
+        <div class="flex-1">
+          <h1 class="text-2xl font-bold mb-1" id="profileName">Loading...</h1>
+          <p class="text-white-90 text-sm flex items-center gap-2"><i class="fas fa-leaf" style="color:#FBC02D;"></i> <span id="memberSince">Member since</span></p>
+        </div>
+        <button class="btn" style="background:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(4px);" id="editBtn">
+          <i class="fas fa-edit"></i> <span id="editBtnText">Edit Profile</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Profile Grid -->
+    <div class="grid gap-6 mb-6" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+      <!-- Personal Information -->
+      <div class="card">
+        <h3 class="text-lg font-bold text-dark mb-4 flex items-center gap-2"><i class="fas fa-user-circle text-green-900"></i> <span id="piTitle">Personal Information</span></h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-leaf text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lFullName">Full Name</p>
+              <p class="font-medium text-dark" id="valName">-</p>
+              <input type="text" class="form-input hidden" id="inputName">
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-phone-alt text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lMobile">Mobile Number</p>
+              <p class="font-medium text-dark" id="valMobile">-</p>
+              <input type="tel" class="form-input hidden" id="inputMobile">
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-envelope text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lEmail">Email Address</p>
+              <p class="font-medium text-dark" id="valEmail">-</p>
+              <input type="email" class="form-input hidden" id="inputEmail">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farm Details -->
+      <div class="card">
+        <h3 class="text-lg font-bold text-dark mb-4 flex items-center gap-2"><i class="fas fa-tractor text-green-900"></i> <span id="fdTitle">Farm Details</span></h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-map-marker-alt text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lLocation">Location</p>
+              <p class="font-medium text-dark" id="valLocation">-</p>
+              <input type="text" class="form-input hidden" id="inputLocation">
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-language text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lLang">Preferred Language</p>
+              <p class="font-medium text-dark" id="valLang">English (EN)</p>
+              <select class="form-select hidden" id="inputLang">
+                <option value="English (EN)">English (EN)</option>
+                <option value="मराठी (MR)">मराठी (MR)</option>
+                <option value="हिन्दी (HI)">हिन्दी (HI)</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-leaf text-green-900 mt-1" style="font-size:1.25rem;"></i>
+            <div class="flex-1">
+              <p class="text-sm text-muted" id="lFarmSize">Farm Size</p>
+              <p class="font-medium text-dark" id="valFarmSize">-</p>
+              <input type="text" class="form-input hidden" id="inputFarmSize">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Settings -->
+    <div class="card mb-6">
+      <h3 class="text-lg font-bold text-dark mb-4 flex items-center gap-2"><i class="fas fa-lock text-green-900"></i> <span id="asTitle">Account Settings</span></h3>
+      <div class="grid gap-4" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <a href="edit-password.html" class="account-btn">
+          <div class="flex items-center gap-3">
+            <div class="icon-wrap" style="background:rgba(27,94,32,.1);padding:.75rem;border-radius:.75rem;"><i class="fas fa-lock text-green-900" style="font-size:1.25rem;"></i></div>
+            <div>
+              <p class="font-medium text-dark" id="asCpTitle">Change Password</p>
+              <p class="text-xs text-muted" id="asCpDesc">Update your password regularly</p>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right chevron"></i>
+        </a>
+        <button class="account-btn danger" id="logoutBtn">
+          <div class="flex items-center gap-3">
+            <div class="icon-wrap" style="background:#FEF2F2;padding:.75rem;border-radius:.75rem;"><i class="fas fa-sign-out-alt text-red" style="font-size:1.25rem;"></i></div>
+            <div style="text-align:left;">
+              <p class="font-medium text-dark" id="asLogout">Logout</p>
+              <p class="text-xs text-muted" id="asLogoutDesc">Sign out from your account</p>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right chevron"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Save/Cancel (editing) -->
+    <div class="flex justify-end gap-4 mt-6 hidden" id="editActions">
+      <button class="btn btn-outline" id="cancelBtn">Cancel</button>
+      <button class="btn btn-green-solid flex items-center gap-2" id="saveBtn"><i class="fas fa-edit"></i> Save Changes</button>
+    </div>
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
